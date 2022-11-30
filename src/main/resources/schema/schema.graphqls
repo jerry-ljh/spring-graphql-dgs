@@ -1,6 +1,8 @@
 type Query {
     shows: [Show!]!
     movies: [Movie!]!
+    product(id: ID!): Product!
+    products(idList: [ID!]!): ProductList!
 }
 
 type Show {
@@ -27,4 +29,31 @@ type Movie {
     title: String!
     actors: [Actor!]!
     music: Music!
+}
+
+type ProductList {
+    total_count: Int!
+    item_list : [Product!]!
+}
+
+type Product {
+    id: ID!
+    name: String!
+    shop: Shop!
+    description: ProductDescription!
+    option: [ProductOption!]!
+}
+
+type Shop {
+    id: ID!
+    name: String!
+}
+
+type ProductOption {
+    key: String!
+    value: String!
+}
+
+type ProductDescription{
+    description: String!
 }
