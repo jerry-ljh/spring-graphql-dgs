@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.3.3.RELEASE"
+    id("org.springframework.boot") version "2.5.3" apply false
     id("io.spring.dependency-management") version "1.0.15.RELEASE"
-    id("com.netflix.dgs.codegen") version "5.6.3"
+    id("com.netflix.dgs.codegen") version "5.4.0"
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
 }
@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:3.10.2"))
+    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:5.4.0"))
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-subscriptions-websockets-autoconfigure")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-joda")
