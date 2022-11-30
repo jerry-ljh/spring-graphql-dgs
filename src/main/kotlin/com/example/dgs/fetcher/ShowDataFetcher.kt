@@ -8,40 +8,15 @@ import com.example.dgs.generated.types.Actor
 import com.example.dgs.generated.types.Location
 import com.example.dgs.generated.types.Music
 import com.example.dgs.generated.types.Show
-import com.example.dgs.service.ActorService
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsData
 import com.netflix.graphql.dgs.DgsDataFetchingEnvironment
-import com.netflix.graphql.dgs.DgsQuery
 import org.dataloader.DataLoader
 import java.util.concurrent.CompletableFuture
 
 
 @DgsComponent
-class ShowsDataFetcher(private val actorService: ActorService) {
-    private val shows = listOf(
-        Show(title = { "Stranger Things" }),
-        Show(title = { "Ozark" }),
-        Show(title = { "The Crown" }),
-        Show(title = { "Dead to Me" }),
-        Show(title = { "Orange is the New Black" })
-    )
-
-    /*
-    @DgsQuery(field = DgsConstants.QUERY.Shows)
-    fun shows(): List<Show> {
-        val titleList = shows.map { it.title }
-        val actorListMapByTitle: Map<String, List<Actor>> = actorService.getActorListMapByTitle(titleList)
-        return actorListMapByTitle.map { (title, actorList) -> Show(title, actorList) }
-    }
-    */
-
-    // 전체 쿼리 필드중 일부만 조회해서 가져옴
-    @DgsQuery(field = DgsConstants.QUERY.Shows)
-    fun shows(): List<Show> {
-        return shows
-    }
-
+class ShowsDataFetcher {
 
     /* 쿼리 필드에 따른 datafetch
     @DgsData(parentType = DgsConstants.SHOW.TYPE_NAME)
@@ -67,8 +42,8 @@ class ShowsDataFetcher(private val actorService: ActorService) {
     }
 
     @DgsData(parentType = DgsConstants.SHOW.TYPE_NAME)
-    fun location(dfe: DgsDataFetchingEnvironment): CompletableFuture<Location> {
-        val dataloader: DataLoader<String, Location> = dfe.getDataLoader(LocationDataloader::class.java)
+    fun location(dfe: DgsDataFetchingEnvironment): CompletableFuture<Location?> {
+        val dataloader: DataLoader<String, Location?> = dfe.getDataLoader(LocationDataloader::class.java)
         val show: Show = dfe.getSource()
         return dataloader.load(show.title)
     }

@@ -5,9 +5,14 @@ import com.example.dgs.dataloader.ProductDescriptionDataloader
 import com.example.dgs.dataloader.ProductOptionDataloader
 import com.example.dgs.dataloader.ShopDataloader
 import com.example.dgs.generated.DgsConstants
-import com.example.dgs.generated.types.*
+import com.example.dgs.generated.types.Product
+import com.example.dgs.generated.types.ProductDescription
+import com.example.dgs.generated.types.ProductOption
+import com.example.dgs.generated.types.Shop
 import com.example.dgs.service.ProductService
-import com.netflix.graphql.dgs.*
+import com.netflix.graphql.dgs.DgsComponent
+import com.netflix.graphql.dgs.DgsData
+import com.netflix.graphql.dgs.DgsDataFetchingEnvironment
 import org.dataloader.DataLoader
 import org.slf4j.LoggerFactory
 import java.util.concurrent.CompletableFuture
@@ -18,16 +23,6 @@ class ProductDataFetcher(
 ) {
 
     private val log = LoggerFactory.getLogger(this::class.simpleName)
-
-    @DgsQuery(field = DgsConstants.QUERY.Products)
-    fun products(@InputArgument idList: List<ID>): ProductList {
-        return ProductList()
-    }
-
-    @DgsQuery(field = DgsConstants.QUERY.Product)
-    fun product(@InputArgument id: ID): Product {
-        return productService.getProduct(id.toLong())
-    }
 
     @DgsData(parentType = DgsConstants.PRODUCT_LIST.TYPE_NAME, field = DgsConstants.PRODUCT_LIST.Total_count)
     fun totalCountLoader(dfe: DgsDataFetchingEnvironment): CompletableFuture<Int> {
