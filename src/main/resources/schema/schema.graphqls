@@ -1,5 +1,6 @@
 type Query {
     shows: [Show!]!
+    movies: [Movie!]!
 }
 
 type Show {
@@ -20,4 +21,10 @@ type Music {
 
 type Location {
     name: String!
+}
+
+type Movie {
+    title: String!
+    actors: [Actor!]!
+    music: Music!
 }
