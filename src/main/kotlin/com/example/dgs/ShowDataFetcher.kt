@@ -1,5 +1,9 @@
 package com.example.dgs
 
+import com.example.dgs.generated.DgsConstants
+import com.example.dgs.generated.types.Actor
+import com.example.dgs.generated.types.Music
+import com.example.dgs.generated.types.Show
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsData
 import com.netflix.graphql.dgs.DgsDataFetchingEnvironment
@@ -11,15 +15,15 @@ import java.util.concurrent.CompletableFuture
 @DgsComponent
 class ShowsDataFetcher(private val actorService: ActorService) {
     private val shows = listOf(
-        Show("Stranger Things"),
-        Show("Ozark"),
-        Show("The Crown"),
-        Show("Dead to Me"),
-        Show("Orange is the New Black")
+        Show(title = { "Stranger Things" }),
+        Show(title = { "Ozark" }),
+        Show(title = { "The Crown" }),
+        Show(title = { "Dead to Me" }),
+        Show(title = { "Orange is the New Black" })
     )
 
     /*
-    @DgsQuery
+    @DgsQuery(field = DgsConstants.QUERY.Shows)
     fun shows(): List<Show> {
         val titleList = shows.map { it.title }
         val actorListMapByTitle: Map<String, List<Actor>> = actorService.getActorListMapByTitle(titleList)
@@ -28,14 +32,14 @@ class ShowsDataFetcher(private val actorService: ActorService) {
     */
 
     // 전체 쿼리 필드중 일부만 조회해서 가져옴
-    @DgsQuery
+    @DgsQuery(field = DgsConstants.QUERY.Shows)
     fun shows(): List<Show> {
         return shows
     }
 
 
     /* 쿼리 필드에 따른 datafetch
-    @DgsData(parentType = "Show")
+    @DgsData(parentType = DgsConstants.SHOW.TYPE_NAME)
     fun actors(dfe: DgsDataFetchingEnvironment): List<Actor> {
         val show: Show = dfe.getSource()
         return actorService.getActorList(show.title)
@@ -43,12 +47,17 @@ class ShowsDataFetcher(private val actorService: ActorService) {
      */
 
     // dataloader를 이용한 batch loader
-    @DgsData(parentType = "Show")
+    @DgsData(parentType = DgsConstants.SHOW.TYPE_NAME)
     fun actors(dfe: DgsDataFetchingEnvironment): CompletableFuture<List<Actor>> {
         val dataloader: DataLoader<String, List<Actor>> = dfe.getDataLoader(ActorDataloader::class.java)
         val show: Show = dfe.getSource()
         return dataloader.load(show.title)
     }
 
-    data class Show(val title: String, val actors: List<Actor> = emptyList())
+    @DgsData(parentType = DgsConstants.SHOW.TYPE_NAME)
+    fun music(dfe: DgsDataFetchingEnvironment): CompletableFuture<Music> {
+        val dataloader: DataLoader<String, Music> = dfe.getDataLoader(MusicDataloader::class.java)
+        val show: Show = dfe.getSource()
+        return dataloader.load(show.title)
+    }
 }

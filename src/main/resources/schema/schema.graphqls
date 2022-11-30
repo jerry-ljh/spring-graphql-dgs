@@ -5,9 +5,14 @@ type Query {
 type Show {
     title: String!
     actors: [Actor!]!
+    music: Music!
 }
 
 type Actor {
     name: String!
     age: Int!
+}
+
+type Music {
+    name: String!
 }

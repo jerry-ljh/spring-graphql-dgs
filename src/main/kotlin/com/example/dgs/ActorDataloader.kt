@@ -1,5 +1,6 @@
 package com.example.dgs
 
+import com.example.dgs.generated.types.Actor
 import com.netflix.graphql.dgs.DgsDataLoader
 import org.dataloader.MappedBatchLoader
 import java.util.concurrent.CompletableFuture
