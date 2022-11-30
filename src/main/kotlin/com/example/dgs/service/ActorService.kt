@@ -1,6 +1,7 @@
-package com.example.dgs
+package com.example.dgs.service
 
 import com.example.dgs.generated.types.Actor
+import com.example.dgs.repository.ActorRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 

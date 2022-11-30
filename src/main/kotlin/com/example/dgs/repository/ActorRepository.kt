@@ -1,4 +1,4 @@
-package com.example.dgs
+package com.example.dgs.repository
 
 import com.example.dgs.generated.types.Actor
 import org.springframework.stereotype.Repository

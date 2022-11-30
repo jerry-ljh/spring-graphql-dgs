@@ -1,4 +1,4 @@
-package com.example.dgs
+package com.example.dgs.service
 
 import com.example.dgs.generated.types.Location
 import org.slf4j.LoggerFactory

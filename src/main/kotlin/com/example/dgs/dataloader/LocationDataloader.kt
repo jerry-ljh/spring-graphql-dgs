@@ -1,6 +1,7 @@
-package com.example.dgs
+package com.example.dgs.dataloader
 
 import com.example.dgs.generated.types.Location
+import com.example.dgs.service.LocationService
 import com.netflix.graphql.dgs.DgsDataLoader
 import org.dataloader.MappedBatchLoader
 import java.util.concurrent.CompletableFuture

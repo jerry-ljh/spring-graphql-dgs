@@ -1,5 +1,7 @@
-package com.example.dgs
+package com.example.dgs.fetcher
 
+import com.example.dgs.dataloader.ActorDataloader
+import com.example.dgs.dataloader.MusicDataloader
 import com.example.dgs.generated.DgsConstants
 import com.example.dgs.generated.types.Actor
 import com.example.dgs.generated.types.Movie
