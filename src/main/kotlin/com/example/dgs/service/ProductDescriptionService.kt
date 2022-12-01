@@ -11,11 +11,12 @@ class ProductDescriptionService {
     private val log = LoggerFactory.getLogger(this::class.simpleName)
 
     fun getProductDescription(productId: Long): ProductDescription {
-        return ProductDescription(description = { "$productId 상품 설명 " })
+        log.info("find description $productId")
+        return ProductDescription(text = "$productId 상품 설명 ")
     }
 
     fun getProductDescriptionMap(productIds: Collection<ID>): Map<ID, ProductDescription> {
-        log.info("find description in batch")
-        return productIds.associateWith { productId -> getProductDescription(productId.toLong()) }
+        log.info("find description in batch $productIds")
+        return productIds.associateWith { productId -> ProductDescription(text = "$productId 상품 설명 ") }
     }
 }

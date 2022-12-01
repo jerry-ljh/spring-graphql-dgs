@@ -1,34 +1,7 @@
 type Query {
-    shows: [Show!]!
-    movies: [Movie!]!
     product(id: ID!): Product!
-    products(idList: [ID!]!): ProductList!
-}
-
-type Show {
-    title: String!
-    actors: [Actor!]!
-    music: Music!
-    location: Location
-}
-
-type Actor {
-    name: String!
-    age: Int!
-}
-
-type Music {
-    name: String!
-}
-
-type Location {
-    name: String!
-}
-
-type Movie {
-    title: String!
-    actors: [Actor!]!
-    music: Music!
+    productWithDataLoader(id: ID!): Product!
+    productsWithDataLoader(idList: [ID!]!): ProductList!
 }
 
 type ProductList {
@@ -55,5 +28,5 @@ type ProductOption {
 }
 
 type ProductDescription{
-    description: String!
+    text: String!
 }

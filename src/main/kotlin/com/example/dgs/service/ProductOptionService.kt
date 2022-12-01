@@ -11,16 +11,22 @@ class ProductOptionService {
     private val log = LoggerFactory.getLogger(this::class.simpleName)
 
     fun getProductOptionList(productId: Long): List<ProductOption> {
+        log.info("find option $productId")
         return listOf(
-            ProductOption(key = { "size" }, value = { "S" }),
-            ProductOption(key = { "size" }, value = { "M" }),
-            ProductOption(key = { "size" }, value = { "L" }),
+            ProductOption(key = "size", value = "S"),
+            ProductOption(key = "size", value = "M"),
+            ProductOption(key = "size", value = "L"),
         )
     }
 
     fun getProductOptionMap(productIds: Collection<ID>): Map<ID, List<ProductOption>> {
-        log.info("find option in batch")
-        return productIds.associateWith { id -> getProductOptionList(id.toLong()) }
+        log.info("find option in batch$productIds")
+        return productIds.associateWith {
+            listOf(
+                ProductOption(key = "size", value = "S"),
+                ProductOption(key = "size", value = "M"),
+                ProductOption(key = "size", value = "L"),
+            )
+        }
     }
-
 }

@@ -10,12 +10,19 @@ class ShopService {
 
     private val log = LoggerFactory.getLogger(this::class.simpleName)
 
-    fun getShop(id: Long): Shop {
-        return Shop(id = { "${System.currentTimeMillis()}" }, name = { "shop_$id" })
+    fun getShop(productId: Long): Shop {
+        log.info("find shop $productId")
+
+        return Shop(id = "${System.currentTimeMillis()}", name = "shop_${productId % 3}")
     }
 
     fun getShopMapByProductId(productIds: Collection<ID>): Map<ID, Shop> {
-        log.info("find shops in batch")
-        return productIds.associateWith { id -> getShop(id.toLong()) }
+        log.info("find shops in batch $productIds")
+        return productIds.associateWith { id ->
+            Shop(
+                id = "${System.currentTimeMillis()}",
+                name = "shop_${id.toLong() % 3}"
+            )
+        }
     }
 }
