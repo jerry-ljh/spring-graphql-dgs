@@ -3,8 +3,8 @@ package com.example.dgs.fetcher
 import com.example.dgs.ID
 import com.example.dgs.dataloader.ProductDescriptionDataloader
 import com.example.dgs.dataloader.ProductOptionDataloader
-import com.example.dgs.dataloader.ProductWithDataLoader
 import com.example.dgs.dataloader.ShopDataloader
+import com.example.dgs.dto.ProductWithDataLoader
 import com.example.dgs.generated.DgsConstants
 import com.example.dgs.generated.types.ProductDescription
 import com.example.dgs.generated.types.ProductOption

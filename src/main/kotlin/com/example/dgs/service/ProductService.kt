@@ -1,7 +1,7 @@
 package com.example.dgs.service
 
 import com.example.dgs.ID
-import com.example.dgs.dataloader.ProductWithDataLoader
+import com.example.dgs.dto.ProductWithDataLoader
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 

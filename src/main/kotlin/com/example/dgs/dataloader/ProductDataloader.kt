@@ -1,9 +1,7 @@
 package com.example.dgs.dataloader
 
 import com.example.dgs.ID
-import com.example.dgs.generated.types.ProductDescription
-import com.example.dgs.generated.types.ProductOption
-import com.example.dgs.generated.types.Shop
+import com.example.dgs.dto.ProductWithDataLoader
 import com.example.dgs.service.ProductService
 import com.example.dgs.throwFieldInitException
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -27,15 +25,3 @@ data class ProductListWithDataLoader(
     val item_list: () -> List<ProductWithDataLoader> = throwFieldInitException("item_list"),
 )
 
-data class ProductWithDataLoader(
-    @JsonProperty("id")
-    val id: String,
-    @JsonProperty("name")
-    val name: String,
-    @JsonProperty("shop")
-    val shop: () -> Shop = throwFieldInitException("shop"),
-    @JsonProperty("description")
-    val description: () -> ProductDescription = throwFieldInitException("description"),
-    @JsonProperty("option")
-    val option: () -> List<ProductOption> = throwFieldInitException("option")
-)

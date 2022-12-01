@@ -2,7 +2,7 @@ package com.example.dgs.resolver
 
 import com.example.dgs.ID
 import com.example.dgs.dataloader.ProductListWithDataLoader
-import com.example.dgs.dataloader.ProductWithDataLoader
+import com.example.dgs.dto.ProductWithDataLoader
 import com.example.dgs.generated.DgsConstants
 import com.example.dgs.service.ProductService
 import com.netflix.graphql.dgs.DgsComponent
