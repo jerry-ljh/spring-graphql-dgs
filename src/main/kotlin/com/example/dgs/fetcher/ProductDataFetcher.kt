@@ -41,7 +41,7 @@ class ProductDataFetcher(
 
     @DgsData(parentType = DgsConstants.PRODUCT.TYPE_NAME, field = DgsConstants.PRODUCT.Shop)
     fun shopLoader(dfe: DgsDataFetchingEnvironment): CompletableFuture<Shop> {
-        val loader: DataLoader<String, Shop> = dfe.getDataLoader(ShopDataloader::class.java)
+        val loader: DataLoader<ID, Shop> = dfe.getDataLoader(ShopDataloader::class.java)
         val product: ProductResponse = dfe.getSource()
         if (product.isShopInitialized()) {
             return CompletableFuture<Shop>().completeAsync { product.shop }
@@ -51,7 +51,7 @@ class ProductDataFetcher(
 
     @DgsData(parentType = DgsConstants.PRODUCT.TYPE_NAME, field = DgsConstants.PRODUCT.Description)
     fun descriptionLoader(dfe: DgsDataFetchingEnvironment): CompletableFuture<ProductDescription> {
-        val loader: DataLoader<String, ProductDescription> = dfe.getDataLoader(ProductDescriptionDataloader::class.java)
+        val loader: DataLoader<ID, ProductDescription> = dfe.getDataLoader(ProductDescriptionDataloader::class.java)
         val product: ProductResponse = dfe.getSource()
         if (product.isDescriptionInitialized()) {
             return CompletableFuture<ProductDescription>().completeAsync { product.description }
@@ -62,7 +62,7 @@ class ProductDataFetcher(
 
     @DgsData(parentType = DgsConstants.PRODUCT.TYPE_NAME, field = DgsConstants.PRODUCT.Option)
     fun optionLoader(dfe: DgsDataFetchingEnvironment): CompletableFuture<List<ProductOption>> {
-        val loader: DataLoader<String, List<ProductOption>> = dfe.getDataLoader(ProductOptionDataloader::class.java)
+        val loader: DataLoader<ID, List<ProductOption>> = dfe.getDataLoader(ProductOptionDataloader::class.java)
         val product: ProductResponse = dfe.getSource()
         if (product.isOptionInitialized()) {
             return CompletableFuture<List<ProductOption>>().completeAsync { product.option }

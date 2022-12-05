@@ -9,9 +9,9 @@ import java.util.concurrent.CompletableFuture
 import java.util.concurrent.CompletionStage
 
 @DgsDataLoader(name = "shop")
-class ShopDataloader(private val shopService: ShopService) : MappedBatchLoader<String, Shop> {
+class ShopDataloader(private val shopService: ShopService) : MappedBatchLoader<ID, Shop> {
 
-    override fun load(productIdSet: Set<ID>): CompletionStage<Map<String, Shop>> {
+    override fun load(productIdSet: Set<ID>): CompletionStage<Map<ID, Shop>> {
         return CompletableFuture.supplyAsync { shopService.getShopMapByProductId(productIdSet) }
     }
 }
