@@ -1,7 +1,7 @@
 package com.example.dgs.service
 
 import com.example.dgs.ID
-import com.example.dgs.dto.ProductWithDataLoader
+import com.example.dgs.dto.ProductResponse
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
@@ -14,26 +14,22 @@ class ProductService(
 
     private val log = LoggerFactory.getLogger(this::class.simpleName)
 
-    fun getProduct(id: Long): ProductWithDataLoader {
-        val description = productDescriptionService.getProductDescription(id)
-        val option = productOptionService.getProductOptionList(id)
-        val shop = shopService.getShop(id)
-        return ProductWithDataLoader(
-            id = id.toString(),
-            name = "test product_$id",
-            description = { description },
-            option = { option },
-            shop = { shop }
-        )
+    fun getProduct(id: Long): ProductResponse {
+        return ProductResponse(id = id.toString(), name = "test product_$id")
+            .apply {
+                description = productDescriptionService.getProductDescription(id)
+                option = productOptionService.getProductOptionList(id)
+                shop = shopService.getShop(id)
+            }
     }
 
-    fun getProductWithDataLoader(id: Long): ProductWithDataLoader {
+    fun getProductWithDataLoader(id: Long): ProductResponse {
         log.info("find product $id")
-        return ProductWithDataLoader(id = id.toString(), name = "test product_$id")
+        return ProductResponse(id = id.toString(), name = "test product_$id")
     }
 
-    fun getProductWithDataLoaderMap(ids: Collection<ID>): Map<ID, ProductWithDataLoader> {
+    fun getProductWithDataLoaderMap(ids: Collection<ID>): Map<ID, ProductResponse> {
         log.info("find product in batch $ids")
-        return ids.associateWith { id -> ProductWithDataLoader(id = id, name = "test product_$id") }
+        return ids.associateWith { id -> ProductResponse(id = id, name = "test product_$id") }
     }
 }
