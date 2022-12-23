@@ -32,4 +32,9 @@ class ProductService(
         log.info("find product in batch $ids")
         return ids.associateWith { id -> ProductResponse(id = id, name = "test product_$id") }
     }
+
+    fun countProduct(): Int {
+        log.info("find product count")
+        return 100
+    }
 }
