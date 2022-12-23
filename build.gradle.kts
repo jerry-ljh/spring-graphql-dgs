@@ -37,6 +37,10 @@ tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
     snakeCaseConstantNames = true
     language = "kotlin"
     generateKotlinNullableClasses = false
+    generateClient = true
+    typeMapping = mutableMapOf(
+        "Json" to "java.lang.String"
+    )
 }
 
 tasks.withType<KotlinCompile> {
