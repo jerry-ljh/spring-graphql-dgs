@@ -1,7 +1,13 @@
+scalar Json
+
 type Query {
     product(id: ID!): Product!
     productWithDataLoader(id: ID!): Product!
     productsWithDataLoader(idList: [ID!]!): ProductList!
+}
+
+type Mutation {
+    saveProductMetadata(metadata: Json!): Json!
 }
 
 type ProductList {

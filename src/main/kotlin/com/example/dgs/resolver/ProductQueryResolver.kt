@@ -11,7 +11,7 @@ import com.netflix.graphql.dgs.InputArgument
 import org.slf4j.LoggerFactory
 
 @DgsComponent
-class ProductResolver(private val productService: ProductService) {
+class ProductQueryResolver(private val productService: ProductService) {
 
     private val log = LoggerFactory.getLogger(this::class.simpleName)
 
@@ -32,5 +32,4 @@ class ProductResolver(private val productService: ProductService) {
         log.info("request productsWithDatLoader")
         return ProductListResponse(totalCount = 0, itemList = emptyList())
     }
-
 }
